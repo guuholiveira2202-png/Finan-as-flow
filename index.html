@@ -51,7 +51,7 @@
             background: #e2e8f0; padding: 5px; border-radius: 15px;
         }
         body.dark .month-wrapper { background: #334155; }
-        .month-nav { display: flex; overflow-x: auto; gap: 8px; scrollbar-width: none; flex: 1; }
+        .month-nav { display: flex; overflow-x: auto; gap: 8px; scrollbar-width: none; flex: 1; scroll-behavior: smooth; }
         .nav-btn { background: white; border: none; width: 30px; height: 30px; border-radius: 10px; cursor: pointer; color: var(--accent); }
         .chip { padding: 10px 18px; border-radius: 12px; cursor: pointer; white-space: nowrap; font-size: 0.75rem; font-weight: 700; color: #64748b; }
         .chip.active { background: var(--accent); color: white; }
@@ -254,18 +254,39 @@
             const labelDate = document.getElementById('label-date');
             list.innerHTML = ''; chips.innerHTML = '';
 
-            // Chips de Meses
-            for(let i = -6; i <= 3; i++) {
-                let d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + i);
-                let mVal = d.toISOString().slice(0, 7);
-                let isActive = mVal === currentFilter;
-                let chip = document.createElement('div');
-                chip.className = `chip ${isActive ? 'active' : ''}`;
-                chip.innerText = d.toLocaleDateString('pt-pt', {month:'short'}).toUpperCase();
-                chip.onclick = () => { currentFilter = mVal; render(); };
-                chips.appendChild(chip);
-                if(isActive) labelDate.innerText = d.toLocaleDateString('pt-BR', {month:'long', year:'numeric'}).toUpperCase();
+            // --- AQUI ESTÃO TODOS OS MESES (3 Anos Completos) ---
+            const anoAtual = new Date().getFullYear();
+            
+            for(let y = anoAtual - 1; y <= anoAtual + 1; y++) {
+                for(let m = 1; m <= 12; m++) {
+                    let mesStr = m.toString().padStart(2, '0');
+                    let mVal = `${y}-${mesStr}`;
+                    let isActive = mVal === currentFilter;
+                    
+                    let chip = document.createElement('div');
+                    chip.className = `chip ${isActive ? 'active' : ''}`;
+                    
+                    // Ajuste de data seguro
+                    let d = new Date(y, m - 1, 15);
+                    let chipText = d.toLocaleDateString('pt-BR', {month:'short'}).toUpperCase();
+                    
+                    // Coloca o ano do lado se não for o ano atual (ex: JAN 25)
+                    if(y !== anoAtual) chipText += ` ${y.toString().slice(-2)}`;
+                    
+                    chip.innerText = chipText;
+                    chip.onclick = () => { currentFilter = mVal; render(); };
+                    chips.appendChild(chip);
+                    
+                    if(isActive) labelDate.innerText = d.toLocaleDateString('pt-BR', {month:'long', year:'numeric'}).toUpperCase();
+                }
             }
+
+            // Centraliza o mês ativo automaticamente na tela
+            setTimeout(() => {
+                const activeChip = chips.querySelector('.active');
+                if (activeChip) activeChip.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+            }, 0);
+            // ---------------------------------------------------
 
             const filtered = items.filter(it => it.date.startsWith(currentFilter));
             let fIn = 0, fOut = 0;
