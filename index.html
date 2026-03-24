@@ -143,15 +143,6 @@
     </div>
 
 
-
-
-
-    <button onclick="dispararAlerta('Sua conta de Luz vence hoje!')" style="padding: 10px 20px; background: var(--cor-primaria); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">
-    🔔 Testar Som e Notificação
-</button>
-
-
-
     <footer style="text-align: center; padding: 40px 20px; color: var(--cor-texto-secundario); border-top: 1px solid var(--cor-borda);">
     <p>&copy; 2024 Finanças Flow - Todos os direitos reservados</p>
     <a href="privacidade.html" style="color: var(--cor-primaria); text-decoration: none; font-size: 14px;">Política de Privacidade</a>
@@ -503,34 +494,76 @@ function ativarNotificacoes() {
 }
 
 
+function enviarNotificacaoParaBarra(titulo, mensagem) {
+    // 1. Primeiro, toca o nosso som de Bip
+    tocarSomNotificacao(); // (Aquela função de som que criamos antes)
 
-// 2. FUNÇÃO QUE FAZ O CELULAR APITAR E MANDAR A MENSAGEM
-function dispararAlerta(mensagem) {
-    // Toca o som de apito
-    const som = new Audio('./alerta.mp3');
-    som.play().catch(e => console.log("O usuário precisa interagir com a tela antes de tocar sons."));
-
-    // Mostra a notificação no celular
+    // 2. Verifica se o usuário deu permissão
     if (Notification.permission === "granted") {
-        new Notification("Finanças Flow", {
-            body: mensagem,
-            icon: "./icone.png", // Usa aquele ícone que você acabou de colocar!
-            vibrate: [200, 100, 200] // Faz o celular vibrar
+        
+        // 3. O SEGREDO: Pede para o Service Worker colocar na barra do celular
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.ready.then(function(registration) {
+                registration.showNotification(titulo, {
+                    body: mensagem,
+                    icon: './icone.png', // O ícone principal
+                    badge: './icone.png', // O ícone pequenininho que fica na barra de cima
+                    vibrate: [200, 100, 200, 100, 200], // Vibração longa
+                    requireInteraction: true // Faz a notificação ficar lá até o usuário clicar ou limpar
+                });
+            });
+        }
+
+    } else if (Notification.permission !== "denied") {
+        // Se ainda não tem permissão, pede agora
+        Notification.requestPermission().then(function(permission) {
+            if (permission === "granted") {
+                enviarNotificacaoParaBarra(titulo, mensagem);
+            }
         });
     }
 }
-
-// 3. FUNÇÃO QUE CHECA SE HOJE É O DIA DE ALGUMA CONTA
-function verificarVencimentosHoje() {
-    // Pega a data de hoje no formato YYYY-MM-DD
+function verificarVencimentosDeHoje() {
+    // 1. Pega a data exata de hoje (formato YYYY-MM-DD)
     const dataHoje = new Date().toISOString().split('T')[0];
-
-    // EXEMPLO: Aqui você deve puxar as transações do seu banco de dados ou LocalStorage
-    // Vou usar um array de exemplo para você ver como funciona:
-    const transacoes = [
-        { titulo: "Conta de Luz", tipo: "despesa", data: dataHoje, notificado: false },
-        { titulo: "Salário", tipo: "ganho", data: "2026-04-10", notificado: false }
+    
+function verificarVencimentosDeHoje() {
+    // 1. Pega a data exata de hoje (formato YYYY-MM-DD)
+    const dataHoje = new Date().toISOString().split('T')[0];
+    
+    // 2. Aqui você busca as suas transações (Estou usando um exemplo fixo com a data de hoje para você testar)
+    // Se você já salva no localStorage, troque pelo seu código.
+    const transacoes = JSON.parse(localStorage.getItem('minhas_transacoes')) || [
+        { id: 1, descricao: "Conta de Luz", valor: 150.00, data: dataHoje, tipo: "despesa", status: "pendente" },
+        { id: 2, descricao: "Salário", valor: 3000.00, data: dataHoje, tipo: "ganho", status: "pendente" },
+        { id: 3, descricao: "Internet", valor: 100.00, data: "2026-04-10", tipo: "despesa", status: "pendente" }
     ];
+
+    // 3. Puxa a memória de notificações de hoje (para não repetir o apito)
+    let jaNotificadosHoje = JSON.parse(localStorage.getItem('notificados_' + dataHoje)) || [];
+
+    // 4. Varre a lista procurando o que é de hoje
+    transacoes.forEach(item => {
+        // Se a data for hoje, se estiver pendente, e se AINDA NÃO foi notificado hoje...
+        if (item.data === dataHoje && item.status === "pendente" && !jaNotificadosHoje.includes(item.id)) {
+            
+            // Prepara o texto da notificação
+            let titulo = item.tipo === "despesa" ? "💸 Despesa Vence Hoje!" : "💰 Dia de Receber!";
+            let mensagem = `${item.descricao} no valor de R$ ${item.valor.toFixed(2)}`;
+            
+            // Chama aquela função que manda para a barra e toca o bip
+            enviarNotificacaoParaBarra(titulo, mensagem);
+            
+            // Grava o ID dessa conta na memória para não apitar de novo hoje
+            jaNotificadosHoje.push(item.id);
+        }
+    });
+
+    // Salva a memória atualizada no celular
+    localStorage.setItem('notificados_' + dataHoje, JSON.stringify(jaNotificadosHoje));
+}
+
+  
 
     // Passa por todas as transações
     transacoes.forEach(transacao => {
