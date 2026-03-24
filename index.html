@@ -354,6 +354,125 @@
 
         // Inicializar
         render();
+
+
+
+
+
+
+
+    // 1. BANCO DE DADOS FIXO E SEGURO
+    const postsFixos = [
+        {
+            id: 1,
+            titulo: "Planejamento Financeiro",
+            descricao: "Aprenda a organizar suas contas mensais.",
+            categoria: "finanças",
+            url: "https://scontent-gru2-1.xx.fbcdn.net/v/t1.15752-9/518348345_1044251757914220_7900990826548113187_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=3Y_ccu8ZOQ0Q7kNvwFdHL9s&_nc_oc=Adrs5MoxZnZogLwpoQDGLN5zl2ndhNiY3Gb6yzXWkZNNotqHaUdFql469aN60HR3Lbs&_nc_zt=23&_nc_ht=scontent-gru2-1.xx&_nc_ss=7a32e&oh=03_Q7cD4wF9m2Ymr1_TTK992d1OlG-TFuYuP5yNbFNa14PG58QiCg&oe=69EA190B",
+            linkCompra: ""
+        },
+        {
+            id: 2,
+            titulo: "Reserva de Emergência",
+            descricao: "O primeiro passo para a liberdade financeira.",
+            categoria: "economia",
+            url: "https://scontent-gru2-1.xx.fbcdn.net/v/t1.15752-9/518348345_1044251757914220_7900990826548113187_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=3Y_ccu8ZOQ0Q7kNvwFdHL9s&_nc_oc=Adrs5MoxZnZogLwpoQDGLN5zl2ndhNiY3Gb6yzXWkZNNotqHaUdFql469aN60HR3Lbs&_nc_zt=23&_nc_ht=scontent-gru2-1.xx&_nc_ss=7a32e&oh=03_Q7cD4wF9m2Ymr1_TTK992d1OlG-TFuYuP5yNbFNa14PG58QiCg&oe=69EA190B",
+            linkCompra: ""
+        },
+        
+    ];
+
+    // 2. FUNÇÃO QUE GERA AS IMAGENS
+    function gerarPins(filtro = '') {
+        const grid = document.getElementById('pin-grid');
+        
+        // Proteção: se o HTML estiver sem a div, ele avisa
+        if (!grid) {
+            console.error("Erro: A div com id 'pin-grid' não existe no HTML!");
+            return; 
+        }
+
+        grid.innerHTML = ''; // Limpa antes de colocar novos
+        
+        const listaParaExibir = filtro 
+            ? postsFixos.filter(p => p.titulo.toLowerCase().includes(filtro.toLowerCase()) || p.categoria.includes(filtro.toLowerCase()))
+            : postsFixos;
+
+        listaParaExibir.forEach(p => {
+            const pin = document.createElement('div');
+            pin.className = 'pin';
+            // Adicionado border-radius para garantir o design arredondado
+            pin.innerHTML = `<img src="${p.url}" alt="${p.titulo}" style="width: 100%; border-radius: 16px; display: block;">`;
+            
+            pin.onclick = () => abrirModal(p.url, p.titulo, p.descricao, p.linkCompra);
+            grid.appendChild(pin);
+        });
+
+        if (listaParaExibir.length === 0) {
+            grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">Nenhuma ideia encontrada.</p>';
+        }
+    }
+
+    // 3. FUNÇÃO DO MODAL
+    function abrirModal(url, titulo, descricao, linkCompra) {
+        document.getElementById('modal-img').src = url;
+        document.getElementById('modal-title').innerText = titulo;
+        
+        let descElement = document.getElementById('modal-desc');
+        if(!descElement) {
+            descElement = document.createElement('p');
+            descElement.id = 'modal-desc';
+            descElement.style.color = "var(--cor-texto-secundario)";
+            document.querySelector('.modal-info').insertBefore(descElement, document.querySelector('.modal-info .btn-entrar'));
+        }
+        descElement.innerText = descricao;
+
+        const btnAcao = document.querySelector('.modal-info .btn-entrar');
+        if (linkCompra) {
+            btnAcao.innerText = "🛒 Ver Oferta";
+            btnAcao.style.background = "#FF9900";
+            btnAcao.style.color = "#000";
+            btnAcao.onclick = () => window.open(linkCompra, '_blank');
+        } else {
+            btnAcao.innerText = "Salvar";
+            btnAcao.style.background = "var(--cor-primaria)";
+            btnAcao.style.color = "white";
+            btnAcao.onclick = () => alert("Salvo no seu perfil!");
+        }
+        
+        document.getElementById('pin-modal').style.display = 'flex';
+    }
+
+    // Fecha o modal
+    function fecharModal(e, force=false) {
+        if(force || e.target.className === 'modal') {
+            document.getElementById('pin-modal').style.display = 'none';
+        }
+    }
+
+    // Barra de Pesquisa
+    const inputPesquisa = document.getElementById('search-input');
+    if(inputPesquisa) {
+        inputPesquisa.addEventListener('input', (e) => {
+            gerarPins(e.target.value);
+        });
+    }
+
+    // 4. MANDA AS IMAGENS APARECEREM ASSIM QUE O SITE ABRE!
+    gerarPins(); 
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>
