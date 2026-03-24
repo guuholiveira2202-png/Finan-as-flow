@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Vintage | Estilo & Navalha</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header id="header">
+        <nav>
+            <div class="logo">VINTAGE<span>BARBER</span></div>
+            <button id="btn-abrir-modal" class="btn-agendar">Agendar Agora</button>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Corte de Respeito.</h1>
+            <p>Onde a tradição encontra o estilo moderno.</p>
+        </div>
+    </section>
+
+    <div id="modal-agendamento" class="modal-overlay">
+        <div class="modal-content premium-modal">
+            <span class="close-modal">&times;</span>
+            <h2>Seu Momento</h2>
+            <p>Configure seu atendimento exclusivo.</p>
+            
+            <form id="form-agendamento">
+                <div class="form-section">
+                    <label class="section-title">1. Escolha o Serviço</label>
+                    <div class="options-grid">
+                        <label class="option-card"><input type="radio" name="servico" value="Corte de Cabelo" required><div class="card-content">Cabelo</div></label>
+                        <label class="option-card"><input type="radio" name="servico" value="Barba Tradicional"><div class="card-content">Barba</div></label>
+                        <label class="option-card"><input type="radio" name="servico" value="Combo Premium"><div class="card-content">Combo</div></label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <label class="section-title">2. Data e Horário</label>
+                    <input type="date" id="data-agendamento" class="premium-input" required>
+                    
+                    <div class="time-grid">
+                        <label class="time-slot"><input type="radio" name="horario" value="09:00" required><div class="time-content">09:00</div></label>
+                        <label class="time-slot"><input type="radio" name="horario" value="10:00"><div class="time-content">10:00</div></label>
+                        <label class="time-slot"><input type="radio" name="horario" value="11:00"><div class="time-content">11:00</div></label>
+                        <label class="time-slot"><input type="radio" name="horario" value="14:00"><div class="time-content">14:00</div></label>
+                        <label class="time-slot"><input type="radio" name="horario" value="15:00"><div class="time-content">15:00</div></label>
+                        <label class="time-slot"><input type="radio" name="horario" value="16:00"><div class="time-content">16:00</div></label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <label class="section-title">3. Seus Dados</label>
+                    <input type="text" id="nome-cliente" class="premium-input" placeholder="Seu Nome Completo" required>
+                </div>
+
+                <button type="submit" class="btn-agendar btn-full">Solicitar Horário</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
+    <script src="script.js"></script>
+
+    <style>
+        :root {
+    --gold-primary: #c5a059;
+    --gold-dark: #8e6d28;
+    --dark-bg: #121212;
+    --grey-bg: #1e1e1e;
+    --text-light: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+body { background-color: var(--dark-bg); color: var(--text-light); scroll-behavior: smooth; }
+h1, h2, h3, .logo { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+
+header { padding: 25px 5%; position: fixed; width: 100%; z-index: 1000; transition: all 0.5s ease; background: transparent; }
+header.scroll { background: rgba(0, 0, 0, 0.95); padding: 15px 5%; box-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+nav { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+.logo { font-size: 1.8rem; letter-spacing: 2px; }
+.logo span { color: var(--gold-primary); }
+
+.btn-agendar {
+    position: relative; background: linear-gradient(135deg, #a37e3b 0%, #c5a059 50%, #a37e3b 100%);
+    color: #121212; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px;
+    padding: 16px 35px; border: none; border-radius: 2px; cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(163, 126, 59, 0.4); overflow: hidden; 
+}
+.btn-agendar::after {
+    content: ''; position: absolute; top: -50%; left: -150%; width: 200%; height: 200%;
+    background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 60%, transparent 100%);
+    transform: rotate(30deg); transition: none;
+}
+.btn-agendar:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(197, 160, 89, 0.6); background: linear-gradient(135deg, #b38d4b 0%, #d4b477 50%, #b38d4b 100%); }
+.btn-agendar:hover::after { left: 100%; transition: all 0.7s ease-in-out; }
+.btn-full { width: 100%; margin-top: 15px; text-align: center; }
+
+.hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1350&q=80') no-repeat center/cover; display: flex; align-items: center; justify-content: center; text-align: center; }
+.hero h1 { font-size: 5rem; color: var(--gold-primary); margin-bottom: 10px; }
+.hero p { font-size: 1.2rem; color: #ccc; }
+
+#servicos { padding: 100px 5%; text-align: center; max-width: 1200px; margin: 0 auto; }
+#servicos h2 { font-size: 2.5rem; margin-bottom: 40px; color: var(--gold-primary); }
+.cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.card { background: var(--grey-bg); padding: 40px 20px; border-radius: 4px; border-bottom: 3px solid transparent; transition: 0.4s; }
+.card:hover { border-color: var(--gold-primary); transform: translateY(-10px); background: #252525; }
+.card h3 { margin-bottom: 15px; font-size: 1.5rem; }
+.card p { color: #aaa; margin-bottom: 20px; }
+.card span { color: var(--gold-primary); font-weight: bold; font-size: 1.5rem; }
+footer { text-align: center; padding: 30px; background: #0a0a0a; color: #555; margin-top: 50px; }
+
+/* Modal & Form */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; }
+.premium-modal { max-width: 450px; width: 90%; background: #151515; border: 1px solid #333; padding: 35px; border-radius: 8px; position: relative; }
+.close-modal { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #666; transition: 0.3s; }
+.close-modal:hover { color: var(--gold-primary); }
+.premium-modal h2 { color: var(--gold-primary); margin-bottom: 5px; font-size: 2rem; }
+.premium-modal p { color: #888; margin-bottom: 25px; font-size: 0.9rem; }
+.form-section { margin-bottom: 20px; text-align: left; }
+.section-title { display: block; color: #fff; font-weight: bold; margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+
+input[type="radio"] { display: none; }
+.options-grid, .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.time-grid { margin-top: 10px; }
+.card-content, .time-content { background: #222; border: 1px solid #333; padding: 12px 5px; text-align: center; border-radius: 4px; color: #aaa; font-weight: bold; transition: all 0.2s ease; cursor: pointer; font-size: 0.9rem; }
+.card-content:hover, .time-content:hover { border-color: var(--gold-primary); color: #fff; }
+input[type="radio"]:checked + .card-content, input[type="radio"]:checked + .time-content { background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 100%); color: #000; border-color: var(--gold-primary); transform: scale(1.03); }
+
+/* ESTILO DOS HORÁRIOS OCUPADOS/INDISPONÍVEIS */
+.time-slot input:disabled + .time-content {
+    background: #111; color: #444; border-color: #222; text-decoration: line-through; cursor: not-allowed; transform: none;
+}
+
+.premium-input { width: 100%; padding: 14px; background: #222; border: 1px solid #333; color: white; border-radius: 4px; transition: border 0.3s; }
+.premium-input:focus { outline: none; border-color: var(--gold-primary); }
+::-webkit-calendar-picker-indicator { filter: invert(1) sepia(100%) saturate(300%) hue-rotate(35deg); cursor: pointer; }
+    </style>
+
+    <script>
+        // 1. INICIALIZAÇÃO DO FIREBASE (Versão Clássica)
+const firebaseConfig = {
+    apiKey: "AIzaSyAZIjOJWDHQnZE8Cwdex_WhXj3uGU1vqmY",
+    authDomain: "barbeari-a.firebaseapp.com",
+    projectId: "barbeari-a",
+    storageBucket: "barbeari-a.firebasestorage.app",
+    messagingSenderId: "1086896788560",
+    appId: "1:1086896788560:web:b9658a2a520da60d81ed55"
+};
+
+// Conecta ao banco de dados
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// 2. LÓGICA DE ABRIR E FECHAR O MODAL (Sem erros)
+const modal = document.getElementById('modal-agendamento');
+const btnAbrirModal = document.getElementById('btn-abrir-modal'); // Pega pelo ID certo agora
+const btnFecharModal = document.querySelector('.close-modal');
+
+// Abre o modal
+btnAbrirModal.onclick = function() {
+    modal.style.display = 'flex';
+};
+
+// Fecha no X
+btnFecharModal.onclick = function() {
+    modal.style.display = 'none';
+};
+
+// Fecha clicando fora
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
+// 3. LÓGICA DO CALENDÁRIO E BLOQUEIO DE HORÁRIOS
+const inputData = document.getElementById('data-agendamento');
+const timeSlots = document.querySelectorAll('.time-slot input');
+
+// Bloqueia dias no passado
+const hoje = new Date();
+inputData.min = hoje.toISOString().split('T')[0];
+
+// Quando escolhe uma data, checa no banco se tem horário ocupado
+inputData.addEventListener('change', function() {
+    const dataSelecionada = this.value;
+    
+    // Libera todos os horários primeiro
+    timeSlots.forEach(slot => { slot.disabled = false; slot.checked = false; });
+
+    // Pede pro Firebase os horários aprovados dessa data
+    db.collection("agendamentos")
+      .where("data", "==", dataSelecionada)
+      .where("status", "==", "Aprovado")
+      .get()
+      .then((querySnapshot) => {
+          const horariosOcupados = [];
+          querySnapshot.forEach((doc) => horariosOcupados.push(doc.data().horario));
+
+          // Bloqueia (risca) os horários que vieram do banco
+          timeSlots.forEach(slot => {
+              if (horariosOcupados.includes(slot.value)) {
+                  slot.disabled = true;
+              }
+          });
+      })
+      .catch((error) => console.log("Erro ao buscar horários:", error));
+});
+
+// 4. ENVIAR O PEDIDO PARA O BANCO DE DADOS
+const formAgendamento = document.getElementById('form-agendamento');
+
+formAgendamento.onsubmit = function(event) {
+    event.preventDefault(); // Impede a página de recarregar
+
+    const servico = document.querySelector('input[name="servico"]:checked').value;
+    const horario = document.querySelector('input[name="horario"]:checked').value;
+    const data = inputData.value;
+    const nome = document.getElementById('nome-cliente').value;
+
+    const btnSubmit = this.querySelector('button[type="submit"]');
+    btnSubmit.innerText = "Enviando...";
+    btnSubmit.disabled = true;
+
+    // Salva no Firebase
+    db.collection("agendamentos").add({
+        nome: nome,
+        servico: servico,
+        data: data,
+        horario: horario,
+        status: 'Pendente', // Vai como pendente para o Admin aprovar
+        criadoEm: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .then(() => {
+        alert("Pedido enviado! O administrador irá revisar seu horário.");
+        modal.style.display = 'none';
+        formAgendamento.reset();
+        btnSubmit.innerText = "Solicitar Horário";
+        btnSubmit.disabled = false;
+    })
+    .catch((error) => {
+        alert("Erro ao enviar. Verifique as regras do Firestore.");
+        console.log(error);
+        btnSubmit.innerText = "Solicitar Horário";
+        btnSubmit.disabled = false;
+    });
+};
+   </script>
+</body>
+</html>
