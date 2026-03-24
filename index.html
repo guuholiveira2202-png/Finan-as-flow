@@ -142,6 +142,16 @@
         </div>
     </div>
 
+
+
+
+
+    <button onclick="dispararAlerta('Sua conta de Luz vence hoje!')" style="padding: 10px 20px; background: var(--cor-primaria); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">
+    🔔 Testar Som e Notificação
+</button>
+
+
+
     <footer style="text-align: center; padding: 40px 20px; color: var(--cor-texto-secundario); border-top: 1px solid var(--cor-borda);">
     <p>&copy; 2024 Finanças Flow - Todos os direitos reservados</p>
     <a href="privacidade.html" style="color: var(--cor-primaria); text-decoration: none; font-size: 14px;">Política de Privacidade</a>
@@ -477,6 +487,122 @@ self.addEventListener('fetch', (e) => {
 
 
 
-    </script>
+// 1. FUNÇÃO PARA PEDIR PERMISSÃO DE NOTIFICAÇÃO
+function ativarNotificacoes() {
+    if (!("Notification" in window)) {
+        alert("Este navegador não suporta notificações.");
+        return;
+    }
+    
+    Notification.requestPermission().then(function(permission) {
+        if (permission === "granted") {
+            alert("Notificações ativadas com sucesso!");
+            verificarVencimentosHoje(); // Já checa se tem algo vencendo hoje
+        }
+    });
+}
+
+
+
+// 2. FUNÇÃO QUE FAZ O CELULAR APITAR E MANDAR A MENSAGEM
+function dispararAlerta(mensagem) {
+    // Toca o som de apito
+    const som = new Audio('./alerta.mp3');
+    som.play().catch(e => console.log("O usuário precisa interagir com a tela antes de tocar sons."));
+
+    // Mostra a notificação no celular
+    if (Notification.permission === "granted") {
+        new Notification("Finanças Flow", {
+            body: mensagem,
+            icon: "./icone.png", // Usa aquele ícone que você acabou de colocar!
+            vibrate: [200, 100, 200] // Faz o celular vibrar
+        });
+    }
+}
+
+// 3. FUNÇÃO QUE CHECA SE HOJE É O DIA DE ALGUMA CONTA
+function verificarVencimentosHoje() {
+    // Pega a data de hoje no formato YYYY-MM-DD
+    const dataHoje = new Date().toISOString().split('T')[0];
+
+    // EXEMPLO: Aqui você deve puxar as transações do seu banco de dados ou LocalStorage
+    // Vou usar um array de exemplo para você ver como funciona:
+    const transacoes = [
+        { titulo: "Conta de Luz", tipo: "despesa", data: dataHoje, notificado: false },
+        { titulo: "Salário", tipo: "ganho", data: "2026-04-10", notificado: false }
+    ];
+
+    // Passa por todas as transações
+    transacoes.forEach(transacao => {
+        // Se a data da transação for igual a hoje e ainda não foi notificado
+        if (transacao.data === dataHoje && !transacao.notificado) {
+            
+            let texto = transacao.tipo === "despesa" 
+                ? `Atenção: Sua despesa "${transacao.titulo}" vence hoje!` 
+                : `Oba! Seu ganho "${transacao.titulo}" está programado para hoje!`;
+            
+            dispararAlerta(texto);
+            
+            // Marca como notificado para não ficar apitando toda hora
+            transacao.notificado = true; 
+        }
+    });
+}
+
+// Executa a checagem assim que o site abrir
+window.onload = () => {
+    // Só roda se o usuário já tiver dado permissão
+    if (Notification.permission === "granted") {
+        verificarVencimentosHoje();
+    }
+};
+
+
+
+// Função que gera um "Bip" sonoro usando puro código (sem precisar de MP3)
+function tocarSomNotificacao() {
+    try {
+        // Inicia o motor de áudio do navegador
+        const context = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
+
+        // Configura o tipo e a altura do som
+        oscillator.type = 'sine'; // Som suave
+        oscillator.frequency.setValueAtTime(880, context.currentTime); // Frequência (880Hz é um tom agradável)
+        
+        // Configura o volume (fade out - o som vai sumindo)
+        gainNode.gain.setValueAtTime(0.1, context.currentTime); // Volume inicial (0.1 é baixo, 1 é estourado)
+        gainNode.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 0.5);
+        
+        // Conecta e toca
+        oscillator.connect(gainNode);
+        gainNode.connect(context.destination);
+        oscillator.start();
+        oscillator.stop(context.currentTime + 0.5); // Duração de meio segundo
+    } catch (e) {
+        console.log("Áudio bloqueado pelo navegador até o usuário interagir com a tela.");
+    }
+}
+
+// Atualizamos a função de alerta para incluir esse som novo
+function dispararAlerta(mensagem) {
+    // 1. Toca o bip gerado pelo código
+    tocarSomNotificacao();
+
+    // 2. Mostra a notificação visual na tela do celular
+    if (Notification.permission === "granted") {
+        new Notification("Finanças Flow", {
+            body: mensagem,
+            icon: "./icone.png", // Seu ícone quadrado oficial
+            vibrate: [200, 100, 200] // Faz o celular vibrar: vibra, pausa, vibra
+        });
+    } else {
+        // Se ele não aceitou a notificação fora do app, mostra um alerta comum na tela
+        alert("🔔 Notificação: " + mensagem);
+    }
+};
+
+   </script>
 </body>
 </html>
