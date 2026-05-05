@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Finanças Flow </title>
+    <title>Finanças Flow - Premium Vibrante</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -13,60 +13,49 @@
     <style>
         /* --- DESIGN SYSTEM (Premium Vibrante) --- */
         :root { 
-            /* Base */
-            --bg: #f1f5f9; /* Slate 100 - Base mais fria */
+            --bg: #f1f5f9; 
             --card-bg: #ffffff;
-            --border: #e2e8f0; /* Slate 200 */
+            --border: #e2e8f0; 
             --nav-bg: rgba(255, 255, 255, 0.95);
 
-            /* Texto */
-            --text-main: #0f172a; /* Slate 900 */
-            --text-sec: #64748b; /* Slate 600 */
+            --text-main: #0f172a; 
+            --text-sec: #64748b; 
             --text-on-accent: #ffffff;
 
-            /* Sotaques (Accents) - Expandidos e Vibrantes */
-            --accent: #6366f1; /* Indigo 500 (Primário) */
-            --accent-hover: #4f46e5; /* Indigo 600 */
-            --accent-sec: #0ea5e9; /* Cyan 500 (Secundário) */
-            --accent-ter: #f59e0b; /* Amber 500 (Terciário) */
+            --accent: #6366f1; 
+            --accent-hover: #4f46e5; 
+            --accent-sec: #0ea5e9; 
+            --accent-ter: #f59e0b; 
 
-            /* Funcionais */
-            --green: #10b981; /* Emerald 500 */
+            --green: #10b981; 
             --green-light: #d1fae5;
-            --red: #f43f5e; /* Rose 500 */
+            --red: #f43f5e; 
             --red-light: #ffe4e6;
 
-            /* Gradientes e Efeitos */
             --wallet-grad: linear-gradient(135deg, var(--accent) 0%, var(--accent-sec) 100%);
             --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.05);
             --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.1);
-            --shadow-vibrant: 0 20px 30px -10px rgba(99, 102, 241, 0.3); /* Sombra colorida */
+            --shadow-vibrant: 0 20px 30px -10px rgba(99, 102, 241, 0.3); 
             
-            /* Geometria */
             --radius-lg: 28px;
             --radius-md: 18px;
             --radius-sm: 12px;
         }
 
         body.dark {
-            /* Base Dark - Mais colorida que cinza puro */
-            --bg: #0b1120; /* Slate 950 misturado com Navy */
-            --card-bg: #1e293b; /* Slate 800 */
-            --border: #334155; /* Slate 700 */
+            --bg: #0b1120; 
+            --card-bg: #1e293b; 
+            --border: #334155; 
             --nav-bg: rgba(15, 23, 42, 0.95);
 
-            /* Texto Dark */
-            --text-main: #f1f5f9; /* Slate 100 */
-            --text-sec: #94a3b8; /* Slate 400 */
+            --text-main: #f1f5f9; 
+            --text-sec: #94a3b8; 
 
-            /* Sotaques Dark (Mantidos vibrantemente) */
             --wallet-grad: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
             
-            /* Funcionais Dark */
             --green-light: rgba(16, 185, 129, 0.15);
             --red-light: rgba(244, 63, 94, 0.15);
 
-            /* Efeitos Dark */
             --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.3);
             --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.5);
             --shadow-vibrant: 0 20px 30px -10px rgba(0, 0, 0, 0.6);
@@ -77,10 +66,8 @@
         body { background: var(--bg); color: var(--text-main); transition: background 0.3s ease, color 0.3s ease; overflow-x: hidden; }
 
         .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; padding: 25px 20px 120px 20px; position: relative; }
-
         .oculto { filter: blur(12px); opacity: 0.3; pointer-events: none; user-select: none; transition: 0.3s; }
         
-        /* Gradientes de Texto para Títulos Principais */
         .text-gradient {
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-sec) 100%);
             -webkit-background-clip: text;
@@ -95,19 +82,25 @@
         .logo-icon { color: var(--accent); font-size: 2rem; animation: float 3s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-        .top-actions { display: flex; gap: 12px; }
-        .icon-btn { background: var(--card-bg); color: var(--text-sec); border: 1px solid var(--border); width: 46px; height: 46px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer; box-shadow: var(--shadow-sm); transition: 0.2s ease;}
+        .top-actions { display: flex; gap: 8px; }
+        .icon-btn { background: var(--card-bg); color: var(--text-sec); border: 1px solid var(--border); width: 42px; height: 42px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; box-shadow: var(--shadow-sm); transition: 0.2s ease;}
         .icon-btn:hover { color: var(--text-on-accent); background: var(--accent); border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-vibrant); }
         .icon-btn:active { transform: translateY(0) scale(0.95); }
+
+        /* Notificação Ativa */
+        .icon-btn.notify-active {
+            color: var(--accent-ter);
+            border-color: var(--accent-ter);
+            background: rgba(245, 158, 11, 0.1);
+        }
 
         /* --- TABS ANIMATION --- */
         .tab-content { display: none; animation: tabFade 0.5s cubic-bezier(0.22, 1, 0.36, 1); flex-direction: column; gap: 28px; }
         .tab-content.active { display: flex; }
         @keyframes tabFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- WALLET CARD (Mais Vibrante) --- */
+        /* --- WALLET CARD --- */
         .wallet-card { background: var(--wallet-grad); color: var(--text-on-accent); padding: 35px 30px; border-radius: var(--radius-lg); box-shadow: var(--shadow-vibrant); position: relative; overflow: hidden; }
-        /* Círculos decorativos de fundo */
         .wallet-card::before, .wallet-card::after { content: ''; position: absolute; border-radius: 50%; background: rgba(255,255,255,0.12); pointer-events: none;}
         .wallet-card::before { width: 250px; height: 250px; top: -50px; right: -70px; }
         .wallet-card::after { width: 150px; height: 150px; bottom: -30px; left: -40px; background: rgba(255,255,255,0.06); }
@@ -120,14 +113,12 @@
         .stat-icon { font-size: 1.4rem; margin-bottom: 6px; display: block;}
         .stat-box small { font-size: 0.8rem; font-weight: 600; opacity: 0.8; color: var(--text-on-accent); }
         .stat-box p { font-size: 1.4rem; font-weight: 800; margin-top: 5px; }
-        .stat-box.inc small i { color: #6ee7b7; /* Green super claro */ }
-        .stat-box.exp small i { color: #fda4af; /* Red super claro */ }
+        .stat-box.inc small i { color: #6ee7b7; }
+        .stat-box.exp small i { color: #fda4af; }
 
         /* --- CARDS & UI COMPONENTS --- */
         .card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); transition: 0.3s ease; position: relative; overflow: hidden;}
         .card:hover { box-shadow: var(--shadow-md); border-color: var(--accent); }
-        
-        /* Tint sutil de fundo para os cartões (Light Mode) */
         body:not(.dark) .card { background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); }
 
         .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
@@ -136,20 +127,19 @@
         
         .chart-wrapper { height: 240px; position: relative; width: 100%; }
 
-        /* --- MONTH SCROLL (Chips Coloridos) --- */
+        /* --- MONTH SCROLL --- */
         .month-scroll { display: flex; overflow-x: auto; gap: 14px; padding: 5px 0 15px 0; scrollbar-width: none; margin-bottom: -10px;}
         .month-scroll::-webkit-scrollbar { display: none; }
         .chip { padding: 14px 26px; border-radius: 100px; font-weight: 600; font-size: 0.95rem; background: var(--card-bg); border: 1px solid var(--border); color: var(--text-sec); cursor: pointer; transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1); white-space: nowrap; box-shadow: var(--shadow-sm); }
         .chip:hover { border-color: var(--accent-sec); color: var(--accent-sec); background: rgba(14, 165, 233, 0.05); }
         .chip.active { background: var(--wallet-grad); color: var(--text-on-accent); border-color: transparent; transform: translateY(-3px); box-shadow: var(--shadow-vibrant);}
 
-        /* --- TRANSACTIONS (Ícones e Valores Coloridos) --- */
+        /* --- TRANSACTIONS --- */
         .tx-item { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid var(--border); }
         .tx-item:last-child { border-bottom: none; padding-bottom: 0; }
         .tx-left { display: flex; align-items: center; gap: 18px; }
         
         .tx-icon { width: 52px; height: 52px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.7rem; transition: 0.2s; position: relative; box-shadow: var(--shadow-sm); }
-        /* Efeito de brilho no ícone ao passar o mouse */
         .tx-item:hover .tx-icon { transform: scale(1.05); box-shadow: var(--shadow-md); }
         
         .tx-icon.inc { background: var(--green-light); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.2); }
@@ -157,14 +147,13 @@
         
         .tx-info h4 { font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
         .tx-info p { font-size: 0.85rem; color: var(--text-sec); font-weight: 500; display: flex; align-items: center; gap: 6px;}
-        .tx-info p i { font-size: 1rem; color: var(--accent-sec); /* Cor de categoria por padrão */ }
         
         .tx-right { text-align: right; }
         .tx-val { font-weight: 800; font-size: 1.2rem; margin-bottom: 6px; letter-spacing: -0.5px;}
         .tx-del { background: none; border: none; color: var(--text-sec); font-size: 1.3rem; cursor: pointer; transition: 0.2s; padding: 5px; border-radius: 50%; }
         .tx-del:hover { color: var(--red); background: var(--red-light); }
 
-        /* --- GOALS (Cards Progressivos e Coloridos) --- */
+        /* --- GOALS --- */
         .goal-card { background: var(--card-bg); padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--border); margin-bottom: 18px; transition: 0.3s; position: relative;}
         .goal-card:hover { border-color: var(--goal-color, var(--accent)); transform: translateX(5px); box-shadow: var(--shadow-md); }
         
@@ -181,14 +170,13 @@
         
         .progress-bg { height: 14px; background: var(--bg); border-radius: 10px; overflow: hidden; margin-top: 18px; border: 1px solid var(--border); position: relative;}
         .progress-fill { height: 100%; background: var(--goal-color, var(--accent)); border-radius: 10px; transition: width 1s cubic-bezier(0.22, 1, 0.36, 1); position: relative;}
-        /* Brilho na barra de progresso */
         .progress-fill::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%); animation: progressShine 2s infinite; }
         @keyframes progressShine { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
 
         .goal-stats { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-sec); margin-top: 10px; font-weight: 600;}
         .perc-label { text-align:right; font-size:0.85rem; font-weight:800; color: var(--goal-color, var(--accent)); margin-top:10px; }
 
-        /* --- EDUCATON TIPS (Cartões com Gradientes sutis) --- */
+        /* --- EDUCATION TIPS --- */
         .tip-card { display:flex; gap:20px; align-items:center; cursor: pointer; transition: 0.3s; }
         .tip-card:hover { transform: translateY(-3px); border-color: var(--tip-color, var(--accent)); }
         .tip-icon-wrap { font-size:2.8rem; color: var(--tip-color, var(--accent)); position: relative; flex-shrink: 0;}
@@ -196,21 +184,20 @@
         .tip-info h4 { margin-bottom:6px; font-size:1.1rem; color: var(--text-main); }
         .tip-info p { font-size:0.9rem; color:var(--text-sec); line-height: 1.5; }
 
-        /* --- BOTTOM NAV & FAB (Menu Vibrant) --- */
+        /* --- BOTTOM NAV & FAB --- */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--nav-bg); backdrop-filter: blur(15px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 15px 10px 30px 10px; z-index: 100; box-shadow: 0 -10px 25px rgba(15, 23, 42, 0.03); }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-sec); background: none; border: none; font-size: 0.8rem; font-weight: 700; cursor: pointer; width: 20%; transition: 0.3s ease; position: relative;}
         .nav-item i { font-size: 1.7rem; transition: 0.2s cubic-bezier(0.22, 1, 0.36, 1); }
         
         .nav-item.active { color: var(--accent); }
         .nav-item.active i { transform: translateY(-8px) scale(1.1); }
-        /* Indicador sutil de tab ativa */
         .nav-item.active::after { content: ''; position: absolute; bottom: -8px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
 
         .fab { position: fixed; bottom: 110px; right: 25px; width: 68px; height: 68px; background: var(--wallet-grad); color: var(--text-on-accent); border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; box-shadow: var(--shadow-vibrant); border: none; cursor: pointer; z-index: 101; transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
         .fab:hover { transform: scale(1.1) rotate(90deg); box-shadow: 0 25px 35px -10px rgba(99, 102, 241, 0.5); }
         .fab:active { transform: scale(0.95); }
 
-        /* --- MODALS (Premium Vibrante) --- */
+        /* --- MODALS --- */
         .modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(8px); z-index: 1000; align-items: flex-end; justify-content: center; opacity: 0; transition: opacity 0.3s;}
         .modal.open { display: flex; opacity: 1; }
         .modal-box { background: var(--card-bg); width: 100%; max-width: 500px; padding: 40px 30px; border-radius: 35px 35px 0 0; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); border-top: 2px solid var(--accent); }
@@ -239,10 +226,10 @@
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 30px -5px rgba(99, 102, 241, 0.4); }
         .btn-primary:active { transform: translateY(0) scale(0.98); }
 
-        /* --- TOAST NOTIFICATIONS (Mais Visíveis) --- */
+        /* --- TOAST NOTIFICATIONS --- */
         .toast-container { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 12px; align-items: center; pointer-events: none;}
-        .toast { background: #1e293b; /* Slate 800 sempre escuro */ color: #ffffff; padding: 16px 28px; border-radius: 100px; font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 12px; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.3); animation: toastIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; border: 1px solid rgba(255,255,255,0.1); }
-        .toast i { font-size: 1.4rem; color: #6ee7b7; /* Green claro fixo */ }
+        .toast { background: #1e293b; color: #ffffff; padding: 16px 28px; border-radius: 100px; font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 12px; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.3); animation: toastIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; border: 1px solid rgba(255,255,255,0.1); }
+        .toast i { font-size: 1.4rem; color: #6ee7b7; }
         .toast.hide { animation: toastOut 0.4s forwards; }
         @keyframes toastIn { from{ opacity:0; transform: translateY(-30px) translateX(-50%) scale(0.9); } to{ opacity:1; transform: translateY(0) translateX(-50%) scale(1); } }
         @keyframes toastOut { from{ opacity:1; transform: translateY(0) translateX(-50%) scale(1); } to{ opacity:0; transform: translateY(-30px) translateX(-50%) scale(0.9); } }
@@ -261,6 +248,7 @@
         <header class="top-bar">
             <div class="logo-title text-gradient"><i class="ph-fill ph-waves logo-icon"></i> Flow</div>
             <div class="top-actions">
+                <button class="icon-btn" id="btn-notify" onclick="requestNotificationPermission()" title="Ativar Notificações às 13h"><i class="ph ph-bell"></i></button>
                 <button class="icon-btn" onclick="exportData()" title="Backup Dados"><i class="ph ph-download-simple"></i></button>
                 <input type="file" id="file-import" style="display:none" accept=".json" onchange="importData(event)">
                 <button class="icon-btn" onclick="document.getElementById('file-import').click()" title="Restaurar Dados"><i class="ph ph-upload-simple"></i></button>
@@ -436,29 +424,18 @@
 
     <script>
         // --- CONFIGURAÇÕES VISUAIS ---
-        // Cores Vibrantes para Categorias (Pie Chart e Ícones)
         const catPalette = {
-            'Alimentação': '#f59e0b', /* Laranja Amber */
-            'Transporte': '#0ea5e9', /* Cyan Azul */
-            'Moradia': '#6366f1', /* Indigo Violeta */
-            'Lazer': '#f43f5e', /* Rose Vermelho */
-            'Saúde': '#10b981', /* Emerald Verde */
-            'Educação': '#a855f7', /* Purple Roxo */
-            'Serviços': '#64748b', /* Slate Cinza */
-            'Salário': '#22c55e', /* Green Verde Renda */
-            'Investimento': '#eab308', /* Yellow Amarelo */
-            'Outros': '#94a3b8'  /* Slate claro */
+            'Alimentação': '#f59e0b', 'Transporte': '#0ea5e9', 'Moradia': '#6366f1', 
+            'Lazer': '#f43f5e', 'Saúde': '#10b981', 'Educação': '#a855f7',
+            'Serviços': '#64748b', 'Salário': '#22c55e', 'Investimento': '#eab308', 'Outros': '#94a3b8' 
         };
 
         const catIcons = { 
-            'Alimentação': 'ph-pizza', 'Transporte': 'ph-car-profile', 
-            'Moradia': 'ph-house', 'Lazer': 'ph-game-controller', 
-            'Saúde': 'ph-heartbeat', 'Educação': 'ph-books',
-            'Serviços': 'ph-file-text', 'Salário': 'ph-money', 
-            'Investimento': 'ph-chart-line-up', 'Outros': 'ph-dots-three-circle' 
+            'Alimentação': 'ph-pizza', 'Transporte': 'ph-car-profile', 'Moradia': 'ph-house', 
+            'Lazer': 'ph-game-controller', 'Saúde': 'ph-heartbeat', 'Educação': 'ph-books',
+            'Serviços': 'ph-file-text', 'Salário': 'ph-money', 'Investimento': 'ph-chart-line-up', 'Outros': 'ph-dots-three-circle' 
         };
         
-        // Cores vibrantes para Metas (aleatórias)
         const goalPalette = ['#6366f1', '#0ea5e9', '#10b981', '#f59e0b', '#a855f7'];
 
         // --- UTILITÁRIOS ---
@@ -487,40 +464,35 @@
         // --- ESTADOS GERAIS ---
         let txs = [];
         let goals = [];
-        // Carregamento Seguro do LocalStorage
         try { txs = JSON.parse(localStorage.getItem('ff_txs')) || []; } catch(e) { txs = []; }
         try { goals = JSON.parse(localStorage.getItem('ff_goals')) || []; } catch(e) { goals = []; }
         
         let privacyMode = localStorage.getItem('ff_privacy') === 'true';
-        let filterMonth = getLocalYYYYMMDD().slice(0, 7); // Ano-Mês atual (ex: 2023-10)
+        let filterMonth = getLocalYYYYMMDD().slice(0, 7); 
         let txType = 'minus'; 
         let barChart = null;
         let pieChart = null;
-        let targetGoalId = null; // ID da meta no modal de add dinheiro
+        let targetGoalId = null;
 
         // --- NAVEGAÇÃO E TEMA ---
         function switchTab(tabId, btnElement) {
-            // UI Update
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             btnElement.classList.add('active');
             
-            // Context Update
             updateFabContext(tabId);
             if(tabId === 'tab-home') { setTimeout(renderCharts, 150); }
         }
 
         function updateFabContext(tabId) {
             const fab = document.getElementById('main-fab');
-            // Esconde o FAB na aba de aprender
             if(tabId === 'tab-dicas') {
                 fab.style.transform = 'scale(0)';
                 fab.style.pointerEvents = 'none';
             } else {
                 fab.style.transform = 'scale(1)';
                 fab.style.pointerEvents = 'auto';
-                // Muda o ícone na aba de metas
                 if(tabId === 'tab-metas') { fab.innerHTML = '<i class="ph ph-target"></i>'; } 
                 else { fab.innerHTML = '<i class="ph ph-plus"></i>'; }
             }
@@ -531,10 +503,9 @@
             const isDark = document.body.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             document.getElementById('theme-icon').className = isDark ? 'ph-fill ph-sun' : 'ph ph-moon';
-            setTimeout(renderCharts, 250); // Redesenha gráficos com novas cores
+            setTimeout(renderCharts, 250); 
         }
         
-        // Inicialização do Tema
         if(localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark');
             document.getElementById('theme-icon').className = 'ph-fill ph-sun';
@@ -546,9 +517,66 @@
             applyPrivacy();
         }
 
+        // --- SISTEMA DE NOTIFICAÇÕES (13:00) ---
+        function requestNotificationPermission() {
+            if (!("Notification" in window)) {
+                showToast("Seu navegador não suporta notificações.", "ph-warning");
+                return;
+            }
+
+            Notification.requestPermission().then(permission => {
+                const btnNotify = document.getElementById('btn-notify');
+                if (permission === "granted") {
+                    showToast("Notificações ativadas para as 13:00!", "ph-bell-ringing");
+                    btnNotify.classList.add('notify-active');
+                    schedulePendingNotifications(); // Agenda as de hoje assim que permitir
+                } else {
+                    showToast("Permissão de notificação negada.", "ph-bell-slash");
+                    btnNotify.classList.remove('notify-active');
+                }
+            });
+        }
+
+        function scheduleNotification(tx) {
+            if (Notification.permission !== "granted") return;
+
+            const [year, month, day] = tx.date.split('-').map(Number);
+            const targetTime = new Date(year, month - 1, day, 13, 0, 0); // Define para as 13:00 do dia do registro
+            const now = new Date();
+            const diff = targetTime.getTime() - now.getTime();
+
+            // Só agenda se a diferença for positiva (ainda não deu 13h) e menor que 24h
+            if (diff > 0 && diff < 86400000) {
+                setTimeout(() => {
+                    const saudacao = tx.val > 0 ? "🟢 Oba! Dinheiro entrando:" : "🔴 Atenção ao gasto:";
+                    new Notification("Finanças Flow", {
+                        body: `${saudacao} ${tx.desc} de ${formatCurrency(Math.abs(tx.val))}`,
+                        icon: "https://cdn-icons-png.flaticon.com/512/2845/2845874.png"
+                    });
+                }, diff);
+                console.log(`Alarme agendado em ${diff}ms para: ${tx.desc}`);
+            }
+        }
+
+        // Verifica transações do dia atual que precisam de agendamento ao abrir o app
+        function schedulePendingNotifications() {
+            if (Notification.permission !== "granted") return;
+            const todayStr = getLocalYYYYMMDD();
+            txs.forEach(tx => {
+                if (tx.date === todayStr) scheduleNotification(tx);
+            });
+        }
+
+        // Checa permissão inicial para pintar o ícone do sino
+        window.addEventListener('load', () => {
+            if (Notification.permission === "granted") {
+                document.getElementById('btn-notify').classList.add('notify-active');
+                schedulePendingNotifications();
+            }
+        });
+
         // --- MODAIS GESTÃO ---
         function handleFabClick() {
-            // Se estiver nas metas, abre modal de meta, senão modal de transação
             if(document.getElementById('tab-metas').classList.contains('active')) {
                 openModal('goal');
             } else {
@@ -559,7 +587,7 @@
         function openModal(type) {
             if(type === 'tx') {
                 document.getElementById('tx-date').value = getLocalYYYYMMDD();
-                setTxType('minus'); // Reset padrão para despesa
+                setTxType('minus'); 
                 document.getElementById('modal-tx').classList.add('open');
             } else if(type === 'goal') {
                 document.getElementById('modal-goal').classList.add('open');
@@ -568,13 +596,11 @@
         
         function closeModals() {
             document.querySelectorAll('.modal').forEach(m => m.classList.remove('open'));
-            // Limpa os formulários após fechar (com delay da animação)
             setTimeout(() => {
                 document.getElementById('form-tx').reset();
                 document.getElementById('form-goal').reset();
                 document.getElementById('form-add-money').reset();
                 targetGoalId = null;
-                // Remove cor personalizada do modal de dinheiro
                 document.getElementById('modal-add-money').style.removeProperty('--goal-color');
             }, 350);
         }
@@ -583,11 +609,9 @@
             txType = type;
             document.getElementById('btn-plus').classList.toggle('active', type === 'plus');
             document.getElementById('btn-minus').classList.toggle('active', type === 'minus');
-            // Muda placeholder do valor baseado no tipo
             document.getElementById('tx-val').placeholder = type === 'plus' ? "Valor Recebido (R$)" : "Valor Gasto (R$)";
         }
 
-        // Abrir modal de adicionar dinheiro à meta
         function openAddMoneyModal(id) {
             const goal = goals.find(g => g.id === id);
             if(!goal) return;
@@ -596,30 +620,29 @@
             const modalEl = document.getElementById('modal-add-money');
             const goalColor = goal.color || '#6366f1';
             
-            // Define cor personalizada no escopo do modal
             modalEl.style.setProperty('--goal-color', goalColor);
             document.getElementById('add-money-title').innerHTML = `Guardar para: <span style="color:${goalColor}">${goal.title}</span>`;
             modalEl.classList.add('open');
         }
 
-        // --- CRUD TRANSAÇÕES (JavaScript) ---
+        // --- CRUD TRANSAÇÕES ---
         document.getElementById('form-tx').onsubmit = (e) => {
             e.preventDefault();
             let val = parseFloat(document.getElementById('tx-val').value);
-            
             if(isNaN(val) || val <= 0) return showToast("Por favor, insira um valor válido.", "ph-warning");
 
-            const category = document.getElementById('tx-cat').value;
-
-            // Adiciona nova transação
-            txs.push({
+            const newTx = {
                 id: Date.now(),
                 desc: document.getElementById('tx-desc').value,
-                cat: category,
-                // Valor negativo se for despesa (minus)
+                cat: document.getElementById('tx-cat').value,
                 val: txType === 'minus' ? -Math.abs(val) : Math.abs(val),
                 date: document.getElementById('tx-date').value
-            });
+            };
+
+            txs.push(newTx);
+            
+            // Agenda a notificação para a transação que acabou de ser criada
+            scheduleNotification(newTx);
             
             persistAndRender();
             closeModals(); 
@@ -634,15 +657,13 @@
             }
         }
 
-        // --- CRUD METAS (JavaScript) ---
+        // --- CRUD METAS ---
         document.getElementById('form-goal').onsubmit = (e) => {
             e.preventDefault();
             let targetVal = parseFloat(document.getElementById('g-target').value);
             let savedInput = parseFloat(document.getElementById('g-saved').value);
-            
             if(isNaN(targetVal) || targetVal <= 0) return showToast("Valor alvo inválido.", "ph-warning");
 
-            // Atribui uma cor vibrante aleatória da paleta
             const randomColor = goalPalette[Math.floor(Math.random() * goalPalette.length)];
 
             goals.push({
@@ -650,7 +671,7 @@
                 title: document.getElementById('g-title').value,
                 target: targetVal,
                 saved: isNaN(savedInput) ? 0 : Math.max(0, savedInput),
-                color: randomColor // Salva a cor no objeto da meta
+                color: randomColor 
             });
             
             localStorage.setItem('ff_goals', JSON.stringify(goals));
@@ -668,10 +689,7 @@
             if(!isNaN(val) && val > 0) {
                 let goalIndex = goals.findIndex(g => g.id === targetGoalId);
                 if(goalIndex > -1) {
-                    goals[goalIndex].saved += val; // Soma valor guardado
-                    // Limita o salvo ao alvo (não pode guardar mais que 100%)
-                    // goals[goalIndex].saved = Math.min(goals[goalIndex].target, goals[goalIndex].saved);
-                    
+                    goals[goalIndex].saved += val; 
                     localStorage.setItem('ff_goals', JSON.stringify(goals));
                     closeModals();
                     renderApp();
@@ -691,92 +709,77 @@
             }
         }
 
-        // --- RENDERIZAÇÃO CENTRAL & LÓGICA DE DADOS ---
+        // --- RENDERIZAÇÃO CENTRAL ---
         let currentMonthIn = 0;
         let currentMonthOut = 0;
-        let categoryData = {}; // Estrutura: { 'Alimentação': 150.0, 'Lazer': 50.0 }
+        let categoryData = {}; 
 
         function persistAndRender() {
-            // Salva no LocalStorage
             localStorage.setItem('ff_txs', JSON.stringify(txs));
             renderApp();
         }
 
         function renderApp() {
-            // 1. Cálculos de Saldo e Totais do Mês Filtrado
             const totalBalance = txs.reduce((acc, curr) => acc + curr.val, 0);
-            // Filtra transações do mês atual e ordena por data decrescente
             const monthTxs = txs.filter(t => t.date.startsWith(filterMonth)).sort((a,b) => new Date(b.date) - new Date(a.date));
             
             currentMonthIn = monthTxs.filter(t => t.val > 0).reduce((acc, curr) => acc + curr.val, 0);
             currentMonthOut = Math.abs(monthTxs.filter(t => t.val < 0).reduce((acc, curr) => acc + curr.val, 0));
 
-            // 2. Agrupamento por Categoria (para o gráfico Pie)
             categoryData = {};
-            monthTxs.filter(t => t.val < 0).forEach(t => { // Apenas despesas
+            monthTxs.filter(t => t.val < 0).forEach(t => { 
                 categoryData[t.cat] = (categoryData[t.cat] || 0) + Math.abs(t.val);
             });
 
-            // 3. Atualização da UI (DASHBOARD HOME)
             document.getElementById('total-balance').innerText = formatCurrency(totalBalance);
             document.getElementById('dash-in').innerText = formatCurrency(currentMonthIn);
             document.getElementById('dash-out').innerText = formatCurrency(currentMonthOut);
             
-            // Label do mês na Home (ex: OUT 2023)
             const [yF, mF] = filterMonth.split('-');
             const dateObj = new Date(yF, parseInt(mF) - 1, 15);
             let mesStr = dateObj.toLocaleDateString('pt-BR', {month:'short', year:'numeric'}).replace('.','');
             document.getElementById('label-month-home').innerText = mesStr.toUpperCase();
 
-            // 4. Renderização dinâmica de componentes
             renderMonthChips();
             renderTransactionList(monthTxs);
             renderGoalsList();
 
-            // 5. Redesenha Gráficos se estiver na Home
             if(document.getElementById('tab-home').classList.contains('active')) renderCharts();
-            // Re-aplica modo privacidade
             applyPrivacy();
         }
 
-        // --- RENDERIZADORES DE COMPONENTES ---
-
-        // Chips de Navegação de Meses (Extrato)
+        // --- RENDERIZADORES COMPONENTES ---
         function renderMonthChips() {
             const chipsContainer = document.getElementById('month-chips');
             chipsContainer.innerHTML = '';
             
-            const anoAtual = new Date().getFullYear();
             const mesesGerar = [];
-            // Gera lista: 6 meses passados + atual + 1 futuro (aproximadamente)
             const d = new Date();
-            d.setDate(15); // Evita problemas de fuso no dia 1
-            d.setMonth(d.getMonth() - 6); // Volta 6 meses
+            d.setDate(15); 
+            d.setMonth(d.getMonth() - 6); 
 
             for(let i = 0; i < 9; i++) {
                 mesesGerar.push({
-                    val: d.toISOString().slice(0, 7), // YYYY-MM
+                    val: d.toISOString().slice(0, 7), 
                     label: d.toLocaleDateString('pt-BR', {month:'short', year:'2-digit'}).toUpperCase().replace('.','')
                 });
-                d.setMonth(d.getMonth() + 1); // Avança 1 mês
+                d.setMonth(d.getMonth() + 1); 
             }
 
             mesesGerar.forEach(m => {
                 let btn = document.createElement('button');
                 btn.className = `chip ${m.val === filterMonth ? 'active' : ''}`;
                 btn.innerText = m.label;
-                btn.onclick = () => { filterMonth = m.val; renderApp(); }; // Muda filtro e atualiza tudo
+                btn.onclick = () => { filterMonth = m.val; renderApp(); }; 
                 chipsContainer.appendChild(btn);
             });
             
-            // Auto-scroll para o chip ativo
             setTimeout(() => {
                 const activeChip = chipsContainer.querySelector('.chip.active');
                 if(activeChip) activeChip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
             }, 100);
         }
 
-        // Lista de Transações (Extrato)
         function renderTransactionList(txsToRender) {
             const txList = document.getElementById('tx-list');
             txList.innerHTML = '';
@@ -815,7 +818,6 @@
             }
         }
 
-        // Lista de Metas (Objetivos)
         function renderGoalsList() {
             const goalsList = document.getElementById('goals-container');
             goalsList.innerHTML = '';
@@ -829,10 +831,9 @@
                     </div>`;
             } else {
                 goals.forEach(g => {
-                    // Cálculos
                     let perc = g.target > 0 ? Math.min(100, (g.saved / g.target) * 100).toFixed(0) : 0;
                     let isDone = g.saved >= g.target;
-                    const color = g.color || 'var(--accent)'; // Usa cor salva ou padrão
+                    const color = g.color || 'var(--accent)'; 
 
                     goalsList.innerHTML += `
                         <div class="goal-card privacy-target ${isDone ? 'done' : ''}" style="--goal-color: ${color}; ${isDone ? 'border-color: var(--green); background: rgba(16, 185, 129, 0.04);' : ''}">
@@ -858,39 +859,36 @@
             }
         }
 
-        // --- GRÁFICOS (Chart.js com Cores Vibrantes) ---
+        // --- GRÁFICOS ---
         function renderCharts() {
             const isDark = document.body.classList.contains('dark');
-            const textColor = isDark ? '#94a3b8' : '#64748b'; // Slate 400 / 600
+            const textColor = isDark ? '#94a3b8' : '#64748b'; 
             const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(15, 23, 42, 0.06)';
             
-            // Fonte padrão global
             Chart.defaults.font.family = "'Inter', sans-serif";
             Chart.defaults.color = textColor;
 
-            // 1. Gráfico de Barras (Balanço Mensal)
             const ctxBar = document.getElementById('mainChart');
-            if(barChart) { barChart.destroy(); barChart = null; } // Evita duplicidade
+            if(barChart) { barChart.destroy(); barChart = null; } 
             barChart = new Chart(ctxBar.getContext('2d'), {
                 type: 'bar',
                 data: {
                     labels: ['Entradas', 'Saídas'],
                     datasets: [{
                         data: [currentMonthIn, currentMonthOut],
-                        // Gradientes nas barras
                         backgroundColor: (context) => {
                             const ctx = context.chart.ctx;
                             const gradientIn = ctx.createLinearGradient(0, 0, 0, 300);
-                            gradientIn.addColorStop(0, '#34d399'); /* Emerald 400 */
-                            gradientIn.addColorStop(1, '#10b981'); /* Emerald 500 */
+                            gradientIn.addColorStop(0, '#34d399'); 
+                            gradientIn.addColorStop(1, '#10b981'); 
                             
                             const gradientOut = ctx.createLinearGradient(0, 0, 0, 300);
-                            gradientOut.addColorStop(0, '#fb7185'); /* Rose 400 */
-                            gradientOut.addColorStop(1, '#f43f5e'); /* Rose 500 */
+                            gradientOut.addColorStop(0, '#fb7185'); 
+                            gradientOut.addColorStop(1, '#f43f5e'); 
                             
                             return [gradientIn, gradientOut];
                         },
-                        borderRadius: 12, // Barras arredondadas premium
+                        borderRadius: 12, 
                         borderSkipped: false,
                         barPercentage: 0.6
                     }]
@@ -899,17 +897,13 @@
                     responsive: true, maintainAspectRatio: false,
                     plugins: { legend: { display: false }, tooltip: { cornerRadius: 8, padding: 12 } },
                     scales: { 
-                        y: { 
-                            grid: { color: gridColor, drawBorder: false }, 
-                            ticks: { callback: (value) => 'R$ ' + value.toLocaleString('pt-BR'), font: { weight: '500' } } 
-                        },
+                        y: { grid: { color: gridColor, drawBorder: false }, ticks: { callback: (value) => 'R$ ' + value.toLocaleString('pt-BR'), font: { weight: '500' } } },
                         x: { grid: { display: false }, ticks: { font: { weight: '700', size: 13 } } }
                     },
                     animation: { duration: 1000, easing: 'easeOutQuart' }
                 }
             });
 
-            // 2. Gráfico Rosca (Pie Chart - Gastos)
             const ctxPie = document.getElementById('pieChart');
             const noDataMsg = document.getElementById('no-data-pie');
             if(pieChart) { pieChart.destroy(); pieChart = null; }
@@ -924,7 +918,6 @@
                 ctxPie.style.display = 'block';
                 noDataMsg.style.display = 'none';
                 
-                // Mapeia cores da paleta vibrante baseada nas labels existentes
                 const bgColors = catLabels.map(label => catPalette[label] || '#94a3b8');
 
                 pieChart = new Chart(ctxPie.getContext('2d'), {
@@ -935,23 +928,18 @@
                             data: catValues,
                             backgroundColor: bgColors,
                             borderWidth: isDark ? 3 : 2, 
-                            borderColor: isDark ? '#1e293b' : '#ffffff', // Borda da cor do card
+                            borderColor: isDark ? '#1e293b' : '#ffffff', 
                             hoverOffset: 10
                         }]
                     },
                     options: {
                         responsive: true, maintainAspectRatio: false,
-                        cutout: '75%', // Buraco central maior (estilo moderno)
+                        cutout: '75%', 
                         plugins: { 
                             legend: { 
                                 position: 'right', 
                                 labels: { 
-                                    color: textColor, 
-                                    usePointStyle: true, 
-                                    pointStyle: 'circle',
-                                    padding: 15,
-                                    font: { size: 12, weight: '600' },
-                                    // Formata label da legenda para incluir valor/porcentagem sutilmente
+                                    color: textColor, usePointStyle: true, pointStyle: 'circle', padding: 15, font: { size: 12, weight: '600' },
                                     callback: (text, chart) => {
                                         const index = chart.index;
                                         const val = chart.chart.data.datasets[0].data[index];
@@ -967,7 +955,7 @@
             }
         }
 
-        // --- GESTÃO DE DADOS (Backup/Restore) ---
+        // --- BACKUP/RESTORE ---
         function exportData() {
             if(txs.length === 0 && goals.length === 0) return showToast("Não há dados para exportar.", "ph-warning");
             
@@ -995,7 +983,6 @@
             reader.onload = function(e) {
                 try {
                     const imported = JSON.parse(e.target.result);
-                    // Validação básica
                     if (imported.ff_txs && Array.isArray(imported.ff_txs)) {
                         txs = imported.ff_txs;
                         localStorage.setItem('ff_txs', JSON.stringify(txs));
@@ -1004,19 +991,17 @@
                         goals = imported.ff_goals;
                         localStorage.setItem('ff_goals', JSON.stringify(goals));
                     }
-                    filterMonth = getLocalYYYYMMDD().slice(0, 7); // Reseta filtro para mês atual
+                    filterMonth = getLocalYYYYMMDD().slice(0, 7); 
                     renderApp();
                     showToast("Dados restaurados com sucesso!", "ph-upload-simple");
                 } catch (error) {
                     showToast("Falha na importação. Arquivo JSON inválido.", "ph-warning");
-                    console.error(error);
                 }
             };
             reader.readAsText(file);
-            event.target.value = ''; // Limpa input
+            event.target.value = ''; 
         }
 
-        // --- PRIVACIDADE ---
         function applyPrivacy() {
             const eye = document.getElementById('eye-icon');
             if(eye) eye.className = privacyMode ? "ph-fill ph-eye-closed" : "ph ph-eye";
@@ -1025,16 +1010,15 @@
             });
         }
 
-        // --- DICAS EDUCACIONAIS (JavaScript com Cores Personalizadas) ---
+        // --- DICAS ---
         function loadTips() {
-            // Definição das dicas com ícones e cores vibrantes específicas
             const tips = [
-                { icon: 'ph-shield-check', color: '#6366f1' /* Indigo */, title: 'Reserva de Emergência', desc: 'Guarde de 3 a 6 meses do seu custo de vida para imprevistos (ex: desemprego, saúde).' },
-                { icon: 'ph-chart-pie-slice', color: '#10b981' /* Emerald */, title: 'Regra 50-30-20', desc: 'Divida sua renda: 50% para Necessidades (aluguel, comida), 30% Desejos (lazer), 20% Futuro (investir/pagar dívidas).' },
-                { icon: 'ph-piggy-bank', color: '#f59e0b' /* Amber */, title: 'Pague-se Primeiro', desc: 'Ao receber seu salário, separe imediatamente a quantia para investir ou poupar, ANTES de pagar as contas.' },
-                { icon: 'ph-credit-card', color: '#f43f5e' /* Rose */, title: 'Cuidado com o Crédito', desc: 'Evite parcelamentos longos e use o cartão de crédito apenas se tiver o dinheiro para pagar a fatura total.' },
-                { icon: 'ph-scissors', color: '#a855f7' /* Purple */, title: 'Corte Gastos Supérfluos', desc: 'Revise assinaturas que não usa e evite compras por impulso. Pequenas economias geram grandes montantes.' },
-                { icon: 'ph-chart-line-up', color: '#0ea5e9' /* Cyan */, title: 'Comece a Investir', desc: 'Não deixe dinheiro parado na poupança. Estude sobre Tesouro Direto e Renda Fixa para começar com segurança.' }
+                { icon: 'ph-shield-check', color: '#6366f1', title: 'Reserva de Emergência', desc: 'Guarde de 3 a 6 meses do seu custo de vida para imprevistos (ex: desemprego, saúde).' },
+                { icon: 'ph-chart-pie-slice', color: '#10b981', title: 'Regra 50-30-20', desc: 'Divida sua renda: 50% para Necessidades (aluguel, comida), 30% Desejos (lazer), 20% Futuro (investir/pagar dívidas).' },
+                { icon: 'ph-piggy-bank', color: '#f59e0b', title: 'Pague-se Primeiro', desc: 'Ao receber seu salário, separe imediatamente a quantia para investir ou poupar, ANTES de pagar as contas.' },
+                { icon: 'ph-credit-card', color: '#f43f5e', title: 'Cuidado com o Crédito', desc: 'Evite parcelamentos longos e use o cartão de crédito apenas se tiver o dinheiro para pagar a fatura total.' },
+                { icon: 'ph-scissors', color: '#a855f7', title: 'Corte Gastos Supérfluos', desc: 'Revise assinaturas que não usa e evite compras por impulso. Pequenas economias geram grandes montantes.' },
+                { icon: 'ph-chart-line-up', color: '#0ea5e9', title: 'Comece a Investir', desc: 'Não deixe dinheiro parado na poupança. Estude sobre Tesouro Direto e Renda Fixa para começar com segurança.' }
             ];
 
             const container = document.getElementById('tips-container');
@@ -1051,14 +1035,11 @@
 
         // --- INICIALIZAÇÃO ---
         window.onload = () => { 
-            loadTips(); // Carrega dicas estáticas
-            renderApp(); // Renderiza dados do storage
-            updateFabContext('tab-home'); // Configura FAB inicial
-            
-            // Splash screen sutil (opcional)
+            loadTips(); 
+            renderApp(); 
+            updateFabContext('tab-home'); 
             setTimeout(() => document.body.style.opacity = '1', 100);
         };
-        // Oculta body inicialmente para evitar flash de conteúdo
         document.body.style.opacity = '0'; 
         document.body.style.transition = 'opacity 0.4s ease';
     </script>
